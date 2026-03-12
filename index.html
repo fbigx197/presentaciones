@@ -2,45 +2,81 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Presentación</title>
 
 <style>
 
 body{
 margin:0;
-background:#0f172a;
+background:#020617;
 font-family:sans-serif;
 overflow:hidden;
 }
+
+/* visor */
 
 iframe{
 width:100vw;
 height:100vh;
 border:none;
+opacity:1;
+transition:opacity .35s ease;
 }
 
+/* barra progreso */
+
+.progress{
+
+position:fixed;
+top:0;
+left:0;
+height:4px;
+width:100%;
+background:rgba(255,255,255,0.1);
+
+}
+
+.bar{
+
+height:100%;
+width:50%;
+background:linear-gradient(90deg,#3b82f6,#22d3ee);
+transition:width .4s ease;
+
+}
+
+/* controles */
+
 .controls{
+
 position:fixed;
 bottom:15px;
 right:15px;
 display:flex;
 gap:6px;
+
 }
 
 button{
-width:38px;
-height:38px;
-font-size:16px;
+
+width:36px;
+height:36px;
 border:none;
 border-radius:8px;
-cursor:pointer;
 background:rgba(255,255,255,0.15);
 color:white;
+font-size:16px;
+cursor:pointer;
 backdrop-filter:blur(6px);
+
 }
 
 button:hover{
-background:rgba(255,255,255,0.25);
+
+background:rgba(255,255,255,0.3);
+
 }
 
 </style>
@@ -48,35 +84,125 @@ background:rgba(255,255,255,0.25);
 
 <body>
 
+<div class="progress">
+<div class="bar" id="progressBar"></div>
+</div>
+
 <iframe id="slideFrame" src="presentacion1.html"></iframe>
 
 <div class="controls">
 
-<button onclick="slide1()">◀</button>
-<button onclick="slide2()">▶</button>
+<button onclick="prev()">◀</button>
+<button onclick="next()">▶</button>
 <button onclick="toggleFull()">[ ]</button>
 
 </div>
 
 <script>
 
+const slides=[
+"presentacion1.html",
+"presentacion2.html"
+];
+
+let current=0;
+
+const frame=document.getElementById("slideFrame");
+
+function updateSlide(){
+
+frame.style.opacity=0;
+
+setTimeout(()=>{
+
+frame.src=slides[current];
+frame.style.opacity=1;
+
+updateProgress();
+
+},200);
+
+}
+
+function next(){
+
+if(current<slides.length-1){
+
+current++;
+
+updateSlide();
+
+}
+
+}
+
+function prev(){
+
+if(current>0){
+
+current--;
+
+updateSlide();
+
+}
+
+}
+
+/* progreso */
+
+function updateProgress(){
+
+let percent=((current+1)/slides.length)*100;
+
+document.getElementById("progressBar").style.width=percent+"%";
+
+}
+
+/* pantalla completa */
+
 function toggleFull(){
 
 if(!document.fullscreenElement){
+
 document.documentElement.requestFullscreen();
+
 }else{
+
 document.exitFullscreen();
-}
 
 }
 
-function slide1(){
-document.getElementById("slideFrame").src="presentacion1.html";
 }
 
-function slide2(){
-document.getElementById("slideFrame").src="presentacion2.html";
+/* swipe móvil */
+
+let startX=0;
+
+document.addEventListener("touchstart",e=>{
+startX=e.touches[0].clientX;
+});
+
+document.addEventListener("touchend",e=>{
+
+let endX=e.changedTouches[0].clientX;
+
+let diff=startX-endX;
+
+if(diff>50){
+
+next();
+
 }
+
+if(diff<-50){
+
+prev();
+
+}
+
+});
+
+updateProgress();
 
 </script>
 
