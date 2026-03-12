@@ -3,7 +3,13 @@
 <head>
 <meta charset="UTF-8">
 
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
 <style>
+
+*{
+box-sizing:border-box;
+}
 
 body{
 margin:0;
@@ -11,14 +17,95 @@ height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-background:#111827;
+font-family:'Inter',sans-serif;
 color:white;
-font-family:sans-serif;
 text-align:center;
+background:linear-gradient(135deg,#020617,#0f172a,#1e293b);
+overflow:hidden;
+}
+
+/* fondo decorativo */
+
+.bg-glow{
+position:absolute;
+width:600px;
+height:600px;
+background:radial-gradient(circle,#3b82f6,transparent 70%);
+filter:blur(120px);
+opacity:0.35;
+animation:float 8s ease-in-out infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(0px)}
+50%{transform:translateY(-40px)}
+100%{transform:translateY(0px)}
+}
+
+/* tarjeta principal */
+
+.card{
+
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.1);
+backdrop-filter:blur(14px);
+
+padding:70px 80px;
+border-radius:20px;
+
+max-width:800px;
+
+box-shadow:
+0 20px 80px rgba(0,0,0,0.5);
+
+animation:fadeUp 1s ease;
+}
+
+/* animación entrada */
+
+@keyframes fadeUp{
+
+from{
+opacity:0;
+transform:translateY(40px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
 }
 
 h1{
-font-size:60px;
+font-size:64px;
+margin-bottom:15px;
+font-weight:800;
+letter-spacing:-1px;
+}
+
+p{
+font-size:22px;
+opacity:0.75;
+line-height:1.6;
+}
+
+/* línea decorativa */
+
+.line{
+width:120px;
+height:4px;
+margin:25px auto;
+background:linear-gradient(90deg,#3b82f6,#22d3ee);
+border-radius:20px;
+}
+
+.footer{
+position:absolute;
+bottom:40px;
+font-size:14px;
+opacity:0.35;
+letter-spacing:2px;
 }
 
 </style>
@@ -27,9 +114,23 @@ font-size:60px;
 
 <body>
 
-<div>
+<div class="bg-glow"></div>
+
+<div class="card">
+
 <h1>Bienvenidos</h1>
-<p>Esta es la primera diapositiva</p>
+
+<div class="line"></div>
+
+<p>
+Esta es la primera diapositiva de la presentación.<br>
+Aquí comienza el recorrido del tema que exploraremos hoy.
+</p>
+
+</div>
+
+<div class="footer">
+PRESENTACIÓN
 </div>
 
 </body>
