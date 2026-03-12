@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Presentación</title>
+
+<style>
+
+body{
+margin:0;
+background:#0f172a;
+color:white;
+font-family:sans-serif;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+button{
+padding:15px 25px;
+margin:10px;
+font-size:18px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+}
+
+.full{
+background:#22c55e;
+}
+
+.exit{
+background:#ef4444;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>Mi Presentación</h1>
+
+<button class="full" onclick="entrarFull()">Pantalla completa</button>
+<button class="exit" onclick="salirFull()">Salir pantalla completa</button>
+
+<script>
+
+function entrarFull(){
+document.documentElement.requestFullscreen();
+}
+
+function salirFull(){
+document.exitFullscreen();
+}
+
+</script>
+
+</body>
+</html>
