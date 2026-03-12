@@ -9,41 +9,52 @@
 body{
 margin:0;
 background:#0f172a;
-color:white;
 font-family:sans-serif;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
+overflow:hidden;
+}
+
+iframe{
+width:100vw;
 height:100vh;
+border:none;
+}
+
+.controls{
+position:fixed;
+bottom:20px;
+right:20px;
+display:flex;
+gap:10px;
 }
 
 button{
-padding:15px 25px;
-margin:10px;
-font-size:18px;
+padding:12px 18px;
+font-size:16px;
 border:none;
-border-radius:10px;
+border-radius:8px;
 cursor:pointer;
 }
 
-.full{
-background:#22c55e;
-}
-
-.exit{
-background:#ef4444;
-}
+.full{background:#22c55e;color:white;}
+.exit{background:#ef4444;color:white;}
+.nav{background:#38bdf8;color:white;}
 
 </style>
 </head>
 
 <body>
 
-<h1>Mi Presentación</h1>
+<iframe id="slideFrame" src="presentacion1.html"></iframe>
+
+<div class="controls">
+
+<button class="nav" onclick="slide1()">1</button>
+<button class="nav" onclick="slide2()">2</button>
 
 <button class="full" onclick="entrarFull()">Pantalla completa</button>
-<button class="exit" onclick="salirFull()">Salir pantalla completa</button>
+<button class="exit" onclick="salirFull()">Salir</button>
+
+</div>
 
 <script>
 
@@ -53,6 +64,14 @@ document.documentElement.requestFullscreen();
 
 function salirFull(){
 document.exitFullscreen();
+}
+
+function slide1(){
+document.getElementById("slideFrame").src="presentacion1.html";
+}
+
+function slide2(){
+document.getElementById("slideFrame").src="presentacion2.html";
 }
 
 </script>
