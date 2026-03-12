@@ -11,7 +11,6 @@
 body{
 margin:0;
 background:#020617;
-font-family:sans-serif;
 overflow:hidden;
 }
 
@@ -21,61 +20,66 @@ iframe{
 width:100vw;
 height:100vh;
 border:none;
-opacity:1;
-transition:opacity .35s ease;
 }
 
 /* barra progreso */
 
 .progress{
-
 position:fixed;
 top:0;
 left:0;
-height:4px;
 width:100%;
+height:3px;
 background:rgba(255,255,255,0.1);
-
+z-index:5;
 }
 
 .bar{
-
 height:100%;
 width:50%;
 background:linear-gradient(90deg,#3b82f6,#22d3ee);
 transition:width .4s ease;
-
 }
 
-/* controles */
+/* botones mini */
 
 .controls{
-
 position:fixed;
-bottom:15px;
-right:15px;
+bottom:8px;
+right:8px;
 display:flex;
-gap:6px;
-
+gap:4px;
+z-index:20;
 }
 
 button{
-
-width:36px;
-height:36px;
+width:22px;
+height:22px;
+font-size:10px;
 border:none;
-border-radius:8px;
+border-radius:5px;
 background:rgba(255,255,255,0.15);
 color:white;
-font-size:16px;
-cursor:pointer;
 backdrop-filter:blur(6px);
-
 }
 
-button:hover{
+/* video transición */
 
-background:rgba(255,255,255,0.3);
+#transition{
+
+position:fixed;
+top:0;
+left:0;
+
+width:100vw;
+height:100vh;
+
+object-fit:cover;
+
+opacity:0;
+z-index:15;
+
+pointer-events:none;
 
 }
 
@@ -90,12 +94,12 @@ background:rgba(255,255,255,0.3);
 
 <iframe id="slideFrame" src="presentacion1.html"></iframe>
 
-<div class="controls">
+<video id="transition" src="transicion.mp4"></video>
 
+<div class="controls">
 <button onclick="prev()">◀</button>
 <button onclick="next()">▶</button>
-<button onclick="toggleFull()">[ ]</button>
-
+<button onclick="toggleFull()">□</button>
 </div>
 
 <script>
@@ -108,30 +112,36 @@ const slides=[
 let current=0;
 
 const frame=document.getElementById("slideFrame");
+const video=document.getElementById("transition");
 
-function updateSlide(){
+/* transición cinematográfica */
 
-frame.style.opacity=0;
+function changeSlide(newIndex){
 
-setTimeout(()=>{
+video.style.opacity=1;
+
+video.currentTime=0;
+
+video.play();
+
+video.onended=()=>{
+
+current=newIndex;
 
 frame.src=slides[current];
-frame.style.opacity=1;
 
 updateProgress();
 
-},200);
+video.style.opacity=0;
+
+}
 
 }
 
 function next(){
 
 if(current<slides.length-1){
-
-current++;
-
-updateSlide();
-
+changeSlide(current+1);
 }
 
 }
@@ -139,11 +149,7 @@ updateSlide();
 function prev(){
 
 if(current>0){
-
-current--;
-
-updateSlide();
-
+changeSlide(current-1);
 }
 
 }
@@ -163,13 +169,9 @@ document.getElementById("progressBar").style.width=percent+"%";
 function toggleFull(){
 
 if(!document.fullscreenElement){
-
 document.documentElement.requestFullscreen();
-
 }else{
-
 document.exitFullscreen();
-
 }
 
 }
@@ -185,20 +187,10 @@ startX=e.touches[0].clientX;
 document.addEventListener("touchend",e=>{
 
 let endX=e.changedTouches[0].clientX;
-
 let diff=startX-endX;
 
-if(diff>50){
-
-next();
-
-}
-
-if(diff<-50){
-
-prev();
-
-}
+if(diff>40) next();
+if(diff<-40) prev();
 
 });
 
