@@ -49,7 +49,7 @@ bottom:8px;
 right:8px;
 display:flex;
 gap:4px;
-z-index:20;
+z-index:30;
 }
 
 button{
@@ -77,7 +77,8 @@ height:100vh;
 object-fit:cover;
 
 opacity:0;
-z-index:15;
+
+z-index:20;
 
 pointer-events:none;
 
@@ -92,10 +93,10 @@ pointer-events:none;
 <div class="bar" id="progressBar"></div>
 </div>
 
-<iframe id="slideFrame" src="presentacion1.html"></iframe>
-<iframe id="slideFrame" src="presentacion2.html"></iframe>
-  
+<!-- visor de slides -->
+<iframe id="slideFrame"></iframe>
 
+<!-- video transición -->
 <video id="transition" src="transicion.mp4"></video>
 
 <div class="controls">
@@ -106,35 +107,56 @@ pointer-events:none;
 
 <script>
 
-const slides=[
+/* ============================= */
+/*        CARGA MÁS ACÁ          */
+/* añade tus slides aquí abajo   */
+/* ============================= */
+
+const slides = [
+
 "presentacion1.html",
-"presentacion2.html"
+"presentacion2.html",
+
+// "presentacion3.html",
+// "presentacion4.html",
+// "presentacion5.html"
+
 ];
 
-let current=0;
+/* ============================= */
 
-const frame=document.getElementById("slideFrame");
-const video=document.getElementById("transition");
+let current = 0;
 
-/* transición cinematográfica */
+const frame = document.getElementById("slideFrame");
+const video = document.getElementById("transition");
+
+/* cargar primer slide */
+
+frame.src = slides[0];
+
+/* transición */
 
 function changeSlide(newIndex){
 
-video.style.opacity=1;
+current = newIndex;
 
-video.currentTime=0;
+/* cargar nuevo slide primero */
 
-video.play();
-
-video.onended=()=>{
-
-current=newIndex;
-
-frame.src=slides[current];
+frame.src = slides[current];
 
 updateProgress();
 
-video.style.opacity=0;
+/* reproducir transición encima */
+
+video.style.opacity = 1;
+
+video.currentTime = 0;
+
+video.play();
+
+video.onended = () => {
+
+video.style.opacity = 0;
 
 }
 
@@ -142,27 +164,27 @@ video.style.opacity=0;
 
 function next(){
 
-if(current<slides.length-1){
-changeSlide(current+1);
+if(current < slides.length - 1){
+changeSlide(current + 1);
 }
 
 }
 
 function prev(){
 
-if(current>0){
-changeSlide(current-1);
+if(current > 0){
+changeSlide(current - 1);
 }
 
 }
 
-/* progreso */
+/* barra progreso */
 
 function updateProgress(){
 
-let percent=((current+1)/slides.length)*100;
+let percent = ((current + 1) / slides.length) * 100;
 
-document.getElementById("progressBar").style.width=percent+"%";
+document.getElementById("progressBar").style.width = percent + "%";
 
 }
 
@@ -180,19 +202,20 @@ document.exitFullscreen();
 
 /* swipe móvil */
 
-let startX=0;
+let startX = 0;
 
-document.addEventListener("touchstart",e=>{
-startX=e.touches[0].clientX;
+document.addEventListener("touchstart", e => {
+startX = e.touches[0].clientX;
 });
 
-document.addEventListener("touchend",e=>{
+document.addEventListener("touchend", e => {
 
-let endX=e.changedTouches[0].clientX;
-let diff=startX-endX;
+let endX = e.changedTouches[0].clientX;
 
-if(diff>40) next();
-if(diff<-40) prev();
+let diff = startX - endX;
+
+if(diff > 40) next();
+if(diff < -40) prev();
 
 });
 
