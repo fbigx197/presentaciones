@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
@@ -22,14 +23,15 @@ color:white;
 text-align:center;
 background:linear-gradient(135deg,#020617,#0f172a,#1e293b);
 overflow:hidden;
+padding:40px;
 }
 
-/* fondo decorativo */
+/* glow fondo */
 
 .bg-glow{
 position:absolute;
-width:600px;
-height:600px;
+width:520px;
+height:520px;
 background:radial-gradient(circle,#3b82f6,transparent 70%);
 filter:blur(120px);
 opacity:0.35;
@@ -37,31 +39,35 @@ animation:float 8s ease-in-out infinite;
 }
 
 @keyframes float{
-0%{transform:translateY(0px)}
-50%{transform:translateY(-40px)}
-100%{transform:translateY(0px)}
+0%{transform:translateY(0)}
+50%{transform:translateY(-35px)}
+100%{transform:translateY(0)}
 }
 
 /* tarjeta principal */
 
 .card{
 
+z-index:2;
+
 background:rgba(255,255,255,0.05);
-border:1px solid rgba(255,255,255,0.1);
-backdrop-filter:blur(14px);
+border:1px solid rgba(255,255,255,0.08);
 
-padding:70px 80px;
-border-radius:20px;
+backdrop-filter:blur(16px);
 
-max-width:800px;
+padding:50px 40px;
+border-radius:18px;
+
+max-width:520px;
 
 box-shadow:
-0 20px 80px rgba(0,0,0,0.5);
+0 25px 70px rgba(0,0,0,0.6);
 
 animation:fadeUp 1s ease;
+
 }
 
-/* animación entrada */
+/* animación */
 
 @keyframes fadeUp{
 
@@ -78,38 +84,39 @@ transform:translateY(0);
 }
 
 h1{
-font-size:64px;
-margin-bottom:15px;
+font-size:44px;
+margin-bottom:14px;
 font-weight:800;
-letter-spacing:-1px;
+letter-spacing:-0.5px;
 }
 
 p{
-font-size:22px;
+font-size:20px;
 opacity:0.75;
 line-height:1.6;
 }
 
-/* línea decorativa */
+/* linea */
 
 .line{
-width:120px;
+width:90px;
 height:4px;
-margin:25px auto;
+margin:18px auto;
 background:linear-gradient(90deg,#3b82f6,#22d3ee);
 border-radius:20px;
 }
 
+/* footer */
+
 .footer{
 position:absolute;
-bottom:40px;
-font-size:14px;
+bottom:50px;
+font-size:12px;
 opacity:0.35;
-letter-spacing:2px;
+letter-spacing:3px;
 }
 
 </style>
-
 </head>
 
 <body>
