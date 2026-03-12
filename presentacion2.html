@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
 
@@ -19,109 +21,97 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 font-family:'Inter',sans-serif;
-background:linear-gradient(135deg,#020617,#0f172a,#1e293b);
+background:linear-gradient(160deg,#020617,#0f172a,#1e293b);
 color:white;
-overflow:hidden;
+padding:30px;
 }
 
-/* fondo glow futurista */
+/* fondo glow */
 
 .glow{
 position:absolute;
-width:700px;
-height:700px;
+width:500px;
+height:500px;
 background:radial-gradient(circle,#3b82f6,transparent 70%);
-filter:blur(150px);
+filter:blur(120px);
 opacity:0.25;
-animation:float 10s ease-in-out infinite;
+z-index:0;
 }
 
-@keyframes float{
-0%{transform:translateY(0)}
-50%{transform:translateY(-50px)}
-100%{transform:translateY(0)}
+/* contenedor */
+
+.container{
+z-index:1;
+width:100%;
+max-width:500px;
 }
 
 /* titulo */
 
 h1{
-font-size:64px;
+font-size:40px;
+margin-bottom:8px;
 font-weight:800;
-margin-bottom:10px;
-letter-spacing:-1px;
 }
 
 .subtitle{
-opacity:0.6;
-margin-bottom:60px;
-font-size:20px;
+opacity:0.65;
+font-size:18px;
+margin-bottom:30px;
 }
 
-/* grid de contenido */
+/* lista */
 
-.grid{
-
-display:grid;
-grid-template-columns:repeat(2, 320px);
-gap:30px;
-
+.list{
+display:flex;
+flex-direction:column;
+gap:18px;
 }
 
 /* tarjetas */
 
 .card{
 
-background:rgba(255,255,255,0.05);
-border:1px solid rgba(255,255,255,0.1);
-border-radius:16px;
+display:flex;
+align-items:center;
+gap:16px;
 
-padding:30px;
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.08);
+
+border-radius:14px;
+
+padding:20px;
 
 backdrop-filter:blur(10px);
 
-transition:all 0.3s ease;
-
-animation:fadeUp 0.8s ease;
+animation:fadeUp 0.6s ease;
 
 }
 
-.card:hover{
-
-transform:translateY(-6px) scale(1.02);
-
-border-color:#3b82f6;
-
-box-shadow:
-0 10px 40px rgba(59,130,246,0.3);
-
-}
-
-/* número */
+/* numero */
 
 .number{
 
-font-size:32px;
+font-size:28px;
 font-weight:800;
 color:#3b82f6;
-margin-bottom:10px;
+min-width:40px;
 
 }
 
 /* texto */
 
-.card h2{
-
+.text h2{
 margin:0;
-font-size:22px;
-
+font-size:20px;
+font-weight:600;
 }
 
-.card p{
-
-opacity:0.6;
+.text p{
+margin:3px 0 0;
 font-size:15px;
-margin-top:8px;
-
+opacity:0.6;
 }
 
 /* animacion */
@@ -130,7 +120,7 @@ margin-top:8px;
 
 from{
 opacity:0;
-transform:translateY(30px);
+transform:translateY(20px);
 }
 
 to{
@@ -140,16 +130,12 @@ transform:translateY(0);
 
 }
 
-/* footer */
-
 .footer{
-
-position:absolute;
-bottom:40px;
-opacity:0.3;
+margin-top:40px;
+font-size:12px;
 letter-spacing:3px;
-font-size:13px;
-
+opacity:0.35;
+text-align:center;
 }
 
 </style>
@@ -160,39 +146,49 @@ font-size:13px;
 
 <div class="glow"></div>
 
-<h1>Contenido</h1>
-<div class="subtitle">Temas que veremos durante la presentación</div>
+<div class="container">
 
-<div class="grid">
+<h1>Contenido</h1>
+<div class="subtitle">Temas de la presentación</div>
+
+<div class="list">
 
 <div class="card">
 <div class="number">01</div>
+<div class="text">
 <h2>Introducción</h2>
-<p>Contexto general del tema y su importancia.</p>
+<p>Contexto general del tema.</p>
+</div>
 </div>
 
 <div class="card">
 <div class="number">02</div>
+<div class="text">
 <h2>Problema</h2>
-<p>Situación actual y desafíos existentes.</p>
+<p>Situación actual y desafíos.</p>
+</div>
 </div>
 
 <div class="card">
 <div class="number">03</div>
+<div class="text">
 <h2>Desarrollo</h2>
-<p>Explicación de ideas principales y análisis.</p>
+<p>Análisis de las ideas principales.</p>
+</div>
 </div>
 
 <div class="card">
 <div class="number">04</div>
-<h2>Conclusiones</h2>
-<p>Resultados, reflexiones y cierre del tema.</p>
+<div class="text">
+<h2>Conclusión</h2>
+<p>Resultados y reflexiones finales.</p>
+</div>
 </div>
 
 </div>
 
-<div class="footer">
-AGENDA
+<div class="footer">AGENDA</div>
+
 </div>
 
 </body>
