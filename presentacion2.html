@@ -3,22 +3,153 @@
 <head>
 <meta charset="UTF-8">
 
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
 <style>
+
+*{
+box-sizing:border-box;
+}
 
 body{
 margin:0;
-height:100vh;
+min-height:100vh;
 display:flex;
+flex-direction:column;
 justify-content:center;
 align-items:center;
-background:#1e293b;
+font-family:'Inter',sans-serif;
+background:linear-gradient(135deg,#020617,#0f172a,#1e293b);
 color:white;
-font-family:sans-serif;
-text-align:center;
+overflow:hidden;
 }
 
+/* fondo glow futurista */
+
+.glow{
+position:absolute;
+width:700px;
+height:700px;
+background:radial-gradient(circle,#3b82f6,transparent 70%);
+filter:blur(150px);
+opacity:0.25;
+animation:float 10s ease-in-out infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(0)}
+50%{transform:translateY(-50px)}
+100%{transform:translateY(0)}
+}
+
+/* titulo */
+
 h1{
-font-size:60px;
+font-size:64px;
+font-weight:800;
+margin-bottom:10px;
+letter-spacing:-1px;
+}
+
+.subtitle{
+opacity:0.6;
+margin-bottom:60px;
+font-size:20px;
+}
+
+/* grid de contenido */
+
+.grid{
+
+display:grid;
+grid-template-columns:repeat(2, 320px);
+gap:30px;
+
+}
+
+/* tarjetas */
+
+.card{
+
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.1);
+border-radius:16px;
+
+padding:30px;
+
+backdrop-filter:blur(10px);
+
+transition:all 0.3s ease;
+
+animation:fadeUp 0.8s ease;
+
+}
+
+.card:hover{
+
+transform:translateY(-6px) scale(1.02);
+
+border-color:#3b82f6;
+
+box-shadow:
+0 10px 40px rgba(59,130,246,0.3);
+
+}
+
+/* número */
+
+.number{
+
+font-size:32px;
+font-weight:800;
+color:#3b82f6;
+margin-bottom:10px;
+
+}
+
+/* texto */
+
+.card h2{
+
+margin:0;
+font-size:22px;
+
+}
+
+.card p{
+
+opacity:0.6;
+font-size:15px;
+margin-top:8px;
+
+}
+
+/* animacion */
+
+@keyframes fadeUp{
+
+from{
+opacity:0;
+transform:translateY(30px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+/* footer */
+
+.footer{
+
+position:absolute;
+bottom:40px;
+opacity:0.3;
+letter-spacing:3px;
+font-size:13px;
+
 }
 
 </style>
@@ -27,9 +158,41 @@ font-size:60px;
 
 <body>
 
-<div>
+<div class="glow"></div>
+
 <h1>Contenido</h1>
-<p>Esta es la segunda diapositiva</p>
+<div class="subtitle">Temas que veremos durante la presentación</div>
+
+<div class="grid">
+
+<div class="card">
+<div class="number">01</div>
+<h2>Introducción</h2>
+<p>Contexto general del tema y su importancia.</p>
+</div>
+
+<div class="card">
+<div class="number">02</div>
+<h2>Problema</h2>
+<p>Situación actual y desafíos existentes.</p>
+</div>
+
+<div class="card">
+<div class="number">03</div>
+<h2>Desarrollo</h2>
+<p>Explicación de ideas principales y análisis.</p>
+</div>
+
+<div class="card">
+<div class="number">04</div>
+<h2>Conclusiones</h2>
+<p>Resultados, reflexiones y cierre del tema.</p>
+</div>
+
+</div>
+
+<div class="footer">
+AGENDA
 </div>
 
 </body>
